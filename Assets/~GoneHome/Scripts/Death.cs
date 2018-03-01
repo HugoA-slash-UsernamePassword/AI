@@ -8,13 +8,13 @@ namespace GoneHome
     {
         void Died()
         {
-
+            Application.LoadLevel(Application.loadedLevel);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.name == "DeathZone" ||
-                other.name == "Enemy")
+            if (other.tag == "KillZone" ||
+                other.tag == "Enemy")
             {
                 Died();
             }
