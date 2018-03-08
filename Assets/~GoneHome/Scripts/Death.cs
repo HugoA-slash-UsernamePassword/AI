@@ -1,23 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GoneHome
 {
     public class Death : MonoBehaviour
     {
-        void Died()
-        {
-            Application.LoadLevel(Application.loadedLevel);
-        }
+        public UnityEvent onDeath;
 
-        private void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
         {
             if (other.tag == "KillZone" ||
                 other.tag == "Enemy")
             {
-                Died();
+                //Died();
+                onDeath.Invoke();
             }
         }
     }
 }
+//void Died()
+//{
+//    //Application.LoadLevel(Application.loadedLevel);
+//}
