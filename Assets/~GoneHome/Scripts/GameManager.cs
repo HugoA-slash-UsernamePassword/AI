@@ -18,8 +18,25 @@ namespace GoneHome
         // Update is called once per frame
         public void RestartLevel()
         {
-            Scene currentScene = SceneManager.GetActiveScene();
-            SceneManager.LoadScene(currentScene.buildIndex);
+            FollowEnemy[] followEnemies = FindObjectsOfType<FollowEnemy>();
+            PatrolEnemy[] patrolEnemies = FindObjectsOfType<PatrolEnemy>();
+            //GoneHome.FairlyUselessScript[] patrolEnemies = FindObjectsOfType<PatrolEnemy>();
+            foreach (var enemy in followEnemies)
+            {
+                enemy.Reset();
+            }
+            foreach (var enemy in patrolEnemies)
+            {
+                enemy.Reset();
+            }
+            // Grab the player in the scene
+            Player player = FindObjectOfType<Player>();
+            // Reset player
+            player.Reset();
+            // Grab the player in the scene
+            Goal goal = FindObjectOfType<Goal>();
+            // Reset player
+            player.Reset();
         }
     }
 }

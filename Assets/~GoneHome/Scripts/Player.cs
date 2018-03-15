@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace GoneHome
 {
@@ -15,6 +16,7 @@ namespace GoneHome
         private Rigidbody rigid;
         private Transform cam;
         private Vector3 spawnPoint;
+        public UnityEvent kill;
         void Start()
         {
             rigid = GetComponent<Rigidbody>();
@@ -47,7 +49,15 @@ namespace GoneHome
             }
             rigid.velocity = vel;
         }
-
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.name.Contains("Goal"))
+            {
+                other.GetComponent<BoxCollider>().enabled = false;
+                other.GetComponent<MeshRenderer>().enabled = false;
+                kill.Invoke();
+            }
+        }
         public void Reset()
         {
             Instantiate(deathParticles, transform.position, transform.rotation);
