@@ -9,6 +9,7 @@ namespace TowerDefense
     [RequireComponent(typeof(NavMeshAgent))]
     public class AIAgent : MonoBehaviour
     {
+        [System.NonSerialized]
         public Transform target;
 
         private NavMeshAgent nav;
