@@ -20,6 +20,16 @@ namespace TowerDefense
             curHealth = maxHealth;
         }
 
+        void OnDestroy()
+        {
+            // If there is a health slider attached to the enemy
+            if (healthSlider)
+            {
+                // Destroy the health bar UI
+                Destroy(healthSlider.gameObject);
+            }
+        }
+
         void Update()
         {
             if (healthSlider)
@@ -48,6 +58,11 @@ namespace TowerDefense
         {
             // Deal damage to droid
             curHealth -= damage;
+            if (healthSlider)
+            {
+                // Convert health to a 0-1 value (health / maxHealth)
+                healthSlider.value = curHealth / maxHealth;
+            }
             // If there is no health
             if (curHealth <= 0)
             {
